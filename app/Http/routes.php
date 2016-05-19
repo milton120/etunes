@@ -12,8 +12,6 @@
 */
 
 
-	Route::get('/login','UserController@showLogin');
-	Route::post('/login','UserController@doLogin');
 
 Route::group(['middleware' => ['web']],function(){
 
@@ -30,5 +28,9 @@ Route::group(['middleware' => ['web']],function(){
 	Route::resource('store','StoreController');
 
 });
+
+
+Route::get('/login','UserController@showLogin');
+Route::post('/login','UserController@doLogin');
 
 
