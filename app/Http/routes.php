@@ -27,10 +27,10 @@ Route::group(['middleware' => ['web']],function(){
 	Route::resource('member','MemberController');
 	Route::resource('store','StoreController');
 
+	Route::get('/login','UserController@showLogin');
+	Route::post('/login','UserController@postSignIn');
+	Route::get('/logout','UserController@doLogout');
 });
 
-
-Route::get('/login','UserController@showLogin');
-Route::post('/login','UserController@postSignIn');
 
 

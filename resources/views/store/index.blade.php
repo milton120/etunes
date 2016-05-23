@@ -12,22 +12,22 @@ span.note {font-size:100%;color:red;}
 	<table id = "song" class="striped" width="100%" cellspacing="0">
 		<thead>
 			<tr>
-				<th>Member Id</th>
-				<th>Member Name</th>
-				<th>email</th>
+				<th>Song Id</th>
+				<th>Song Title</th>
+				<th>Price</th>
 				<th>update</th>
 				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($members as $member)
+			@foreach($songs as $song)
 			<tr>
-				<td>{{ $member->memberId }} </td>
-				<td>{{ $member->memberName }} </td>
-				<td>{{ $member->email }} </td>
-				<td><a href= "{{ url('/').'/'.'member/'.$member->memberId.'/edit' }}" > Edit </a></td>
+				<td>{{ $song->songId }} </td>
+				<td>{{ $song->songTitle }} </td>
+				<td>{{ $song->price }} </td>
+				<td><a href= "#" > Edit </a></td>
 				<td>
-					<form action= "{{ url('/').'/'.'member/'.$member->memberId }}" method="POST">
+					<form action= "#" method="POST">
 						<input type ="hidden" name="_token" value = "{{ csrf_token() }}">
 						<input type="hidden" value="DELETE" name="_method">
 						<input type="submit" value="Delete">

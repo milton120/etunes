@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Song;
-use App\Member;
 
 class StoreController extends Controller
 {
@@ -18,8 +17,9 @@ class StoreController extends Controller
     public function index()
     {
         //
-        $members = Member::all();
-        return view('store.index',['members' => $members]);
+        //$members = Member::all();
+        $songs = Song::all();
+        return view('store.index',['songs' => $songs]);
     }
 
     /**

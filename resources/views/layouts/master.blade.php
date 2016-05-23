@@ -139,8 +139,15 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-      <li><a href="{{ route('member.create') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="{{ url('/').'/login' }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+       @if (!Auth::check())
+            <li><a href="{{ route('member.create') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="{{ url('/').'/login' }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+             @else (Auth::check())
+                  <li><a href="#">Profile</a></li>
+                  <li><a href="{{ url('/').'/logout' }}"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
+
+        @endif
     </ul>
   </div>
 </nav>

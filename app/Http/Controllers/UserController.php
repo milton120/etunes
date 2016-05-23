@@ -31,9 +31,14 @@ class UserController extends Controller
 
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]) )
         {
-        	return "success";
+        	return redirect('/');
         }
-        else return "not success";
+        else return redirect('/login');
 
+    }
+    public function doLogout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }
