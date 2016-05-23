@@ -9,8 +9,6 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css"/>
  
-  <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.js"></script>
-
 
     <style>
   .container {
@@ -135,7 +133,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="{{ url('/') }}">Home</a></li>
-      <li><a href="#">Store</a></li>
+      <li><a href="{{ route('store.index') }}">Store</a></li>
       <li><a href="{{ url('/').'/contact' }}">Contact</a></li>
       <li><a href="{{ url('/').'/about' }}">About</a></li>
     </ul>

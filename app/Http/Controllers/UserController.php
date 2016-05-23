@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
+//use App\User;
 use App\Member;
-use Auth;
 use Hash;
 
 class UserController extends Controller
@@ -18,20 +18,20 @@ class UserController extends Controller
     	return view('login');
     }
 
-    public function doLogin(Request $request)
+    public function postSignIn(Request $request)
     {
     	$this->validate($request, [
         'email' => 'required',
         'password' =>'required',
         ]);
 		
-  		$email = Input::get('email');
-  		$password = Input::get('password');
+  		//$email = Input::get('email');
+  		//$password = Input::get('password');
 
 
-        if(Auth::attempt(['email' => $email, 'password' => $password]) )
+        if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]) )
         {
-        	echo "success";
+        	return "success";
         }
         else return "not success";
 

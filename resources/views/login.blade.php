@@ -7,7 +7,7 @@
 	<div class="col-md-6 col-md-offset-3">
 	    <h3>Sign In</h3>
         <hr/>
-        {!! Form::open(array('action' => 'UserController@doLogin','class'=>'form-horizontal')) !!}
+        {!! Form::open(array('action' => 'UserController@postSignIn','class'=>'form-horizontal')) !!}
         
         <div class="form-group">
         {!! Form::label('email', 'Email:') !!}

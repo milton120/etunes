@@ -31,6 +31,6 @@ Route::group(['middleware' => ['web']],function(){
 
 
 Route::get('/login','UserController@showLogin');
-Route::post('/login','UserController@doLogin');
+Route::post('/login','UserController@postSignIn');
 
 
