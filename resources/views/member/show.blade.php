@@ -3,8 +3,25 @@
 @section('title','show edit')
 
 @section('content')
-<h3>this is show.blade.php extending master page. </h3>
-<h2> we can implememt laravel collective form :D </h2>
 
+    <div class="container">
+
+        <h1>Profile</h1>
+
+        <hr>
+
+         @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+        @endif
+
+        <h3>Name : {{ $member->memberName }}</h3>
+        <h3>Email : {{ $member->email }} </h3>
+        <hr>
+
+         <a href="{{ url('/').'/'.'member/'.$member->memberId.'/edit' }}" class="btn btn-primary btn-lg">Update Profile</a>
+
+   	</div>
 
 @stop

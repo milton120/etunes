@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Song;
-use DB;
+use Cart;
 
-class StoreController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +18,7 @@ class StoreController extends Controller
     public function index()
     {
         //
-        //$songs = Song::all();
-        $songs = DB::table('song')
-            ->join('album', 'song.albumId', '=', 'album.albumId')
-            ->join('artist', 'song.artistId', '=', 'artist.artistId')
-            ->join('genre', 'song.genreId', '=', 'genre.genreId')
-            ->select('song.*','album.albumName', 'artist.artistName', 'genre.genreName')
-            ->get();
-
-        return view('store.index',['songs' => $songs]);
+        return view('cart.index');
     }
 
     /**
@@ -48,6 +40,13 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
+        if (Cart::search(['id' => $request->songId])) {
+
+            return redirect('/cart')->withSuccessMessage('Item is already in your cart!');
+        }
+        Cart::associate('Song','App')->add($request->songId, $request->songTitle, 1, $request->price);
+        return redirect('/cart')->withSuccessMessage('Item added to your cart!');
+        //return view('cart.index')->withSuccessMessage('Item added to your cart');
     }
 
     /**
@@ -56,19 +55,9 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($songId)
+    public function show($id)
     {
         //
-        //$song = Song::find($songId);
-        $song = DB::table('song')
-            ->join('album', 'song.albumId', '=', 'album.albumId')
-            ->join('artist', 'song.artistId', '=', 'artist.artistId')
-            ->join('genre', 'song.genreId', '=', 'genre.genreId')
-            ->select('song.*','album.albumName', 'artist.artistName', 'genre.genreName')
-            ->where('song.songId', '=', $songId)
-            ->get();
-
-        return view('store.show',['song' => $song]);
     }
 
     /**
@@ -103,5 +92,7 @@ class StoreController extends Controller
     public function destroy($id)
     {
         //
+        Cart::remove($id);
+        return redirect('/cart')->withSuccessMessage('Item has been removed!');
     }
 }

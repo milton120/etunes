@@ -112,7 +112,7 @@ class MemberController extends Controller
         $member->password = Hash::make($request->get('password'));
         $member->save();
 
-        return redirect('member');
+        return redirect('/profile')->withSuccessMessage('Profile Updated Successfully.');;
     }
 
     /**

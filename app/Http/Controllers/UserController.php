@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 //use App\User;
 use App\Member;
 use Hash;
+use DB;
 
 class UserController extends Controller
 {
@@ -25,16 +26,25 @@ class UserController extends Controller
         'password' =>'required',
         ]);
 		
-  		//$email = Input::get('email');
-  		//$password = Input::get('password');
-
 
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]) )
         {
-        	return redirect('/');
+            //$members = DB::table('member')->get();
+            $role = DB::table('member')->where('email', $request['email'])->value('role');
+            if($role=='admin') 
+            {
+                return "this is admin";
+            }
+
+        	else return redirect('/');
         }
         else return redirect('/login');
 
+    }
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return view('member.show',['member' => $user]);
     }
     public function doLogout(Request $request)
     {

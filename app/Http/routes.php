@@ -20,16 +20,17 @@ Route::group(['middleware' => ['web']],function(){
     	return view('home');
 	});
 
-	Route::get('/about','AboutController@showAboutPage');
-	Route::get('/contact',function(){
-		return view('contact');
-	});
+	Route::get('/about','PageController@showAboutPage');
+	Route::get('/contact','PageController@showContactPage');
 	Route::resource('member','MemberController');
 	Route::resource('store','StoreController');
+	Route::resource('cart','CartController');
 
 	Route::get('/login','UserController@showLogin');
 	Route::post('/login','UserController@postSignIn');
 	Route::get('/logout','UserController@doLogout');
+	Route::get('/profile','UserController@showProfile');
+
 });
 
 

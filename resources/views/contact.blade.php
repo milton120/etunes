@@ -5,6 +5,19 @@
 @section('content')
 
 <div class="container">
+
+  @if (session()->has('success_message'))
+    <div class="alert alert-success">
+      {{ session()->get('success_message') }}
+    </div>
+  @endif
+
+  @if (session()->has('error_message'))
+    <div class="alert alert-danger">
+        {{ session()->get('error_message') }}
+    </div>
+  @endif
+
   <h3 class="text-center">Contact</h3>
   <p class="text-center"><em>Stay tuned and give us feedback.</em></p>
 
@@ -24,13 +37,13 @@
           <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
         </div>
       </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <textarea class="form-control" id="comment" name="comment" placeholder="Comment" rows="5"></textarea>
       <br>
       <div class="row">
         <div class="col-md-12 form-group">
           <button class="btn pull-right" type="submit">Send</button>
         </div>
-      </div>	
+      </div>
     </div>
   </div>
 

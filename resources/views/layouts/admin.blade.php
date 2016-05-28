@@ -144,7 +144,7 @@
             <li><a href="{{ route('member.create') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="{{ url('/').'/login' }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
              @else (Auth::check())
-                  <li><a href="{{ url('/').'/profile' }}">Profile</a></li>
+                  <li><a href="#">Profile</a></li>
                   <li><a href="{{ url('/').'/logout' }}"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
 
         @endif
