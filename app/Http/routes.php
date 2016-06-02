@@ -31,6 +31,12 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/logout','UserController@doLogout');
 	Route::get('/profile','UserController@showProfile');
 
+	Route::resource('genre','GenreController');
+	Route::resource('company','CompanyController');
+	Route::resource('album','AlbumController');
+	Route::resource('artist','ArtistController');
+	Route::resource('song','SongController');
+
 });
 
 

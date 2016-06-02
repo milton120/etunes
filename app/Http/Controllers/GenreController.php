@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Song;
-use DB;
+use App\Genre;
 
-class StoreController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,15 +16,9 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //$songs = Song::all();
-        $songs = DB::table('song')
-            ->join('album', 'song.albumId', '=', 'album.albumId')
-            ->join('artist', 'song.artistId', '=', 'artist.artistId')
-            ->join('genre', 'song.genreId', '=', 'genre.genreId')
-            ->select('song.*','album.albumName', 'artist.artistName', 'genre.genreName')
-            ->get();
-
-        return view('store.index',['songs' => $songs]);
+        //
+        $genres = Genre::all();
+        return view('genre.index',['genres' => $genres]);
     }
 
     /**
@@ -36,6 +29,7 @@ class StoreController extends Controller
     public function create()
     {
         //
+        return view('genre.create');
     }
 
     /**
@@ -47,6 +41,16 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
+
+        $this->validate($request, [
+        'genreName' => 'required|unique:genre,genreName',
+        ]);
+        
+        $genre = new Genre;
+        $genre->genreName=$request->get('genreName');
+        $genre->save();
+
+        return redirect('/genre');
     }
 
     /**
@@ -55,19 +59,9 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($songId)
+    public function show($id)
     {
         //
-        //$song = Song::find($songId);
-        $song = DB::table('song')
-            ->join('album', 'song.albumId', '=', 'album.albumId')
-            ->join('artist', 'song.artistId', '=', 'artist.artistId')
-            ->join('genre', 'song.genreId', '=', 'genre.genreId')
-            ->select('song.*','album.albumName', 'artist.artistName', 'genre.genreName')
-            ->where('song.songId', '=', $songId)
-            ->get();
-
-        return view('store.show',['song' => $song]);
     }
 
     /**
@@ -76,9 +70,11 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($genreId)
     {
         //
+        $genre = Genre::find($genreId);
+        return view('genre.edit',['genre'=>$genre]);
     }
 
     /**
@@ -88,9 +84,17 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $genreId)
     {
         //
+        $this->validate($request, [
+        'genreName' => 'required|unique:genre,genreName,'.$genreId.',genreId',
+        ]);
+
+        $genre = Genre::find($genreId);
+        $genre->genreName = $request->get('genreName');
+        $genre->save();
+        return redirect('/genre');
     }
 
     /**
@@ -99,8 +103,11 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($genreId)
     {
         //
+        $genre = Genre::find($genreId);
+        $genre->delete();
+        return redirect('/genre')->with(['del_msg' => 'sucessfully deleted.']);
     }
 }

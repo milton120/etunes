@@ -132,20 +132,19 @@
       <a class="navbar-brand" href="{{ url('/') }}">etunes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ url('/') }}">Home</a></li>
-      <li><a href="{{ route('store.index') }}">Store</a></li>
-      <li><a href="{{ url('/').'/contact' }}">Contact</a></li>
-      <li><a href="{{ url('/').'/about' }}">About</a></li>
+      <li class="active"><a href="#">Admin</a></li>
+      <li><a href="{{ route('song.index') }}">Song</a></li>
+      <li><a href="{{ route('artist.index') }}">Artist</a></li>
+      <li><a href="{{ route('album.index') }}">Album</a></li>
+      <li><a href="{{ route('company.index')}}">Company</a></li>
+      <li><a href="{{ route('genre.index') }}">Genre</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ route('cart.index') }}"><span class="glyphicon glyphicon-shopping-cart"></span> Cart ({{ Cart::instance('main')->count(false) }})</a></li>
-
        @if (!Auth::check())
-            <li><a href="{{ route('member.create') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="{{ url('/').'/login' }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
              @else (Auth::check())
                   <li><a href="#">Profile</a></li>
-                  <li><a href="{{ url('/').'/logout' }}"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
 
         @endif
     </ul>
