@@ -69,7 +69,10 @@
             </table>
 
             <a href="{{ route('store.index') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
-            <a href="{{ url('/').'/'.'cart/1' }}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+            
+            <!--<a href="{{ url('/').'/'.'cart/1' }}" class="btn btn-success btn-lg">Proceed to Checkout</a> -->
+
+            <a href="{{ route('payment.index') }}" class="btn btn-success btn-lg">Proceed to Checkout</a>
 
         @else
 

@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web']],function(){
 	Route::resource('artist','ArtistController');
 	Route::resource('song','SongController');
 	Route::resource('message','MessageController');
+	Route::resource('payment','PaymentController');
 
 });
 
