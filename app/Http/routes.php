@@ -31,11 +31,16 @@ Route::group(['middleware' => ['web']],function(){
 	Route::get('/logout','UserController@doLogout');
 	Route::get('/profile','UserController@showProfile');
 
+	Route::get('/adminmaker','AdminController@showUser');
+	Route::post('/adminmaker','AdminController@setAdmin');
+	Route::get('/sellhistory','AdminController@showSellHistory');
+
 	Route::resource('genre','GenreController');
 	Route::resource('company','CompanyController');
 	Route::resource('album','AlbumController');
 	Route::resource('artist','ArtistController');
 	Route::resource('song','SongController');
+	Route::resource('message','MessageController');
 
 });
 

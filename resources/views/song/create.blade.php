@@ -8,7 +8,7 @@
 	<div class="col-md-6 col-md-offset-3">
 	    <h3>Enter Song Info</h3>
         <hr/>
-        {!! Form::open(array('action' => 'SongController@store', 'class'=>'form-horizontal')) !!}
+        {!! Form::open(array('action' => 'SongController@store', 'class'=>'form-horizontal','files'=>true)) !!}
         
         @include('song.form');
 

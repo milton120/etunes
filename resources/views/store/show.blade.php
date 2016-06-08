@@ -12,6 +12,9 @@
         <div class="row">
 
             <div class="col-md-8">
+
+               <img src="{{URL::asset('/image/')}}/{{$item->imageLocation}}" class=".img-rounded" alt = "album name" width="200" height="200"> 
+
                 <h3>Title : {{ $item->songTitle }} </h3>
                 <h3>Artist : {{ $item->artistName }} </h3>
                 <h3>Album : {{ $item->albumName }} </h3>
@@ -27,7 +30,7 @@
 
                 <br><br>
             </div> <!-- end col-md-8 -->
-            {{!! Form::close() !!}}
+            {!! Form::close() !!}
         </div> <!-- end row --> 
 
 @endforeach

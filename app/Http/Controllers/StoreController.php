@@ -63,7 +63,7 @@ class StoreController extends Controller
             ->join('album', 'song.albumId', '=', 'album.albumId')
             ->join('artist', 'song.artistId', '=', 'artist.artistId')
             ->join('genre', 'song.genreId', '=', 'genre.genreId')
-            ->select('song.*','album.albumName', 'artist.artistName', 'genre.genreName')
+            ->select('song.*','album.*', 'artist.artistName', 'genre.genreName')
             ->where('song.songId', '=', $songId)
             ->get();
 

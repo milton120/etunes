@@ -132,19 +132,27 @@
       <a class="navbar-brand" href="{{ url('/') }}">etunes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Admin</a></li>
-      <li><a href="{{ route('song.index') }}">Song</a></li>
-      <li><a href="{{ route('artist.index') }}">Artist</a></li>
-      <li><a href="{{ route('album.index') }}">Album</a></li>
-      <li><a href="{{ route('company.index')}}">Company</a></li>
-      <li><a href="{{ route('genre.index') }}">Genre</a></li>
+    @if(Auth::check())
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ url('/').'/sellhistory' }}">Sell History</a></li>
+              <li><a href="{{ url('/').'/adminmaker' }}">Make Admin</a></li>
+            </ul>
+          </li>
+          <li><a href="{{ route('song.index') }}">Song</a></li>
+          <li><a href="{{ route('artist.index') }}">Artist</a></li>
+          <li><a href="{{ route('album.index') }}">Album</a></li>
+          <li><a href="{{ route('company.index')}}">Company</a></li>
+          <li><a href="{{ route('genre.index') }}">Genre</a></li>
     </ul>
+    @endif
     <ul class="nav navbar-nav navbar-right">
        @if (!Auth::check())
             <li><a href="{{ url('/').'/login' }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
              @else (Auth::check())
-                  <li><a href="#">Profile</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
+                  <li><a href="{{ url('/').'/logout' }}"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
 
         @endif
     </ul>

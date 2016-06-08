@@ -134,7 +134,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="{{ url('/') }}">Home</a></li>
       <li><a href="{{ route('store.index') }}">Store</a></li>
-      <li><a href="{{ url('/').'/contact' }}">Contact</a></li>
+      <li><a href="{{ route('message.index') }}">Contact</a></li>
       <li><a href="{{ url('/').'/about' }}">About</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

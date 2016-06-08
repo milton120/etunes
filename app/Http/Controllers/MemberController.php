@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Http\Requests\CreateMemberRequest;
 use Illuminate\HttpResponse;
 use Hash;
+use Mail;
 
 class MemberController extends Controller
 {
@@ -51,15 +52,29 @@ class MemberController extends Controller
         'password' =>'required',
         ]);*/
 
+        $address = $request->get('email');
+
         $member = new Member;
         $member->memberName = $request->get('memberName');
         $member->email = $request->get('email');
         $member->password = Hash::make(($request->get('password')));
         $member->signUpDate = Carbon::now();
         $member->role = 'user';
+        $member->rank = 0;
         $member->save();
 
-        return redirect('/member');
+        // send email
+
+        Mail::raw('Congratulation!! welcome to etunes', function ($message) use ($request)
+        {
+
+            $message->from('team@etunes.com', 'etunes');
+
+            $message->to($request->get('email'))->subject('etunes Sign Up');
+
+        }); 
+
+        return redirect('/login');
     }
 
     /**

@@ -25,6 +25,7 @@ class UserController extends Controller
         'email' => 'required',
         'password' =>'required',
         ]);
+
 		
 
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]) )
@@ -33,7 +34,7 @@ class UserController extends Controller
             $role = DB::table('member')->where('email', $request['email'])->value('role');
             if($role=='admin') 
             {
-                return "this is admin";
+                return redirect('/album');
             }
 
         	else return redirect('/');

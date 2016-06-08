@@ -150,6 +150,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        //Laravel\Cashier\CashierServiceProvider::class,
 
         /*
          * Application Service Providers...

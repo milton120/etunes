@@ -26,7 +26,7 @@
       <h3>Address</h3> <br>
       <p><span class="glyphicon glyphicon-map-marker"></span>Dhaka, Bangladesh</p>
       <p><span class="glyphicon glyphicon-phone"></span>Phone: 01720298317</p>
-      <p><span class="glyphicon glyphicon-envelope"></span>Email: etunes@mail.com</p>	   
+      <p><span class="glyphicon glyphicon-envelope"></span>Email: etunes@mail.com</p>    
     </div>
     <div class="col-md-8">
       <div class="row">
@@ -37,7 +37,7 @@
           <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
         </div>
       </div>
-      <textarea class="form-control" id="comment" name="comment" placeholder="Comment" rows="5"></textarea>
+      <textarea class="form-control" id="comment" name="comment" placeholder="message" rows="5"></textarea>
       <br>
       <div class="row">
         <div class="col-md-12 form-group">

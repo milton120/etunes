@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => 'sandbox19273f57fe524670b7b155223a15583e.mailgun.org',
+        'secret' => 'key-f3c35f40b5b4ab45d41ab492c4a79ef7',
     ],
 
     'ses' => [
@@ -34,5 +34,13 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    'braintree' => [
+    'model'  => App\Member::class,
+    'environment' => env('sandbox'),
+    'merchant_id' => env('6smzp5qtgsdhtbdm'),
+    'public_key' => env('jrpscyppy84dvycm'),
+    'private_key' => env('9276a445e306b5c2f66c431c920d9c19'),
+],
 
 ];

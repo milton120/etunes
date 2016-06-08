@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Album;
+use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Storage;
 
 class AlbumController extends Controller
 {
@@ -41,13 +43,21 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         //
+        
         $this->validate($request, [
         'albumName' => 'required',
         'artistId' => 'required',
         'companyId' => 'required',
         'albumGenre' => 'required',
         'releaseDate' => 'required',
+        'image' => 'required',
         ]);
+
+        $file = array('image' => Input::file('image'));
+        $extension = Input::file('image')->getClientOriginalExtension();
+        $fileName = $request->get('albumName').'.'.$extension;
+        Input::file('image')->move('image',$fileName);
+
         
         $album = new Album;
 
@@ -57,6 +67,7 @@ class AlbumController extends Controller
         $album->albumGenre = $request->get('albumGenre');
         $album->releaseDate = $request->get('releaseDate');
         $album->albumDownloads = 0;
+        $album->imageLocation = $fileName;
 
         //dd($album);
 
@@ -74,6 +85,10 @@ class AlbumController extends Controller
     public function show($id)
     {
         //
+        /*$path = public_path();
+        $path = $path . '/image/'.'milton.jpg';
+
+        return response()->download($path); */
     }
 
     /**

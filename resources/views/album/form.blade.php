@@ -26,3 +26,8 @@
         {!! Form::label('ReleaseDate', 'Released Year:') !!}
         {!! Form::text('releaseDate',$value = null, array('class' =>'form-control', 'placeholder'=>'Date')) !!}
         </div>
+
+        <div class="form-group">
+        {{ Form::label('file','Image',array('id'=>'','class'=>'')) }}
+        {{ Form::file('image','',array('id'=>'','class'=>'')) }}
+        </div>

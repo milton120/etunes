@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\Http\Requests;
 use App\Song;
 use Cart;
+use ZipArchive;
+use Auth;
+use DB;
 
 class CartController extends Controller
 {
@@ -58,6 +61,52 @@ class CartController extends Controller
     public function show($id)
     {
         //
+
+        //$zipname = 'etunes_song.zip';
+        if(!Auth::check())
+        {
+            return redirect('/login');
+        }
+
+        $zipname = tempnam("tmp", "zip");
+        $zip = new ZipArchive;
+        //$zip->open($zipname, ZipArchive::CREATE);
+        $zip->open($zipname, ZipArchive::CREATE);
+        
+        foreach (Cart::content() as $item)
+        {
+            $name = $item->song->songLocation;
+            $path = public_path();
+            $path = $path . '/song/'. $name;
+            
+            $zip->addFile($path);
+        }
+
+        $zip->close();
+
+        $totalAmount = Cart::total();
+        
+        //return view('/payment',['totalAmount' => $totalAmount]);
+        
+        $userId = Auth::user()->memberId;
+        $downloadCount = Auth::user()->rank + 1;
+
+        DB::table('member')
+            ->where('memberId', $userId)
+            ->update(['rank' => $downloadCount]);
+
+        foreach(Cart::content() as $item)
+        {
+            $songId = $item->song->songId;
+             DB::table('sellHistory')->insert(
+            ['memberId' => $userId, 'songId' => $songId,'sellDate' => Carbon::now()]
+            );
+        }
+
+        Cart::destroy();
+
+        return response()->download($zipname);
+
     }
 
     /**
@@ -95,4 +144,11 @@ class CartController extends Controller
         Cart::remove($id);
         return redirect('/cart')->withSuccessMessage('Item has been removed!');
     }
+
+    /*public function songDownload()
+    {
+        $path = $path . '/song/'.'8.mp3';
+
+        return response()->download($path);
+    }*/
 }

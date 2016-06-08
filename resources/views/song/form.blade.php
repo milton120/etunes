@@ -34,3 +34,8 @@
         {!! Form::label('Language', 'Language:') !!}
         {!! Form::text('language',$value = null, array('class' =>'form-control', 'placeholder'=>'Language')) !!}
         </div>
+
+        <div class="form-group">
+        {{ Form::label('file','Upload Song',array('id'=>'','class'=>'')) }}
+        {{ Form::file('songLocation','',array('id'=>'','class'=>'')) }}
+        </div>

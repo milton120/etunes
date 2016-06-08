@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Song;
+use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Storage;
 
 class SongController extends Controller
 {
@@ -41,6 +43,21 @@ class SongController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $this->validate($request, [
+        'songTitle' => 'required',
+        'artistId' => 'required',
+        'albumId' => 'required',
+        'genreId' => 'required',
+        'price' => 'required',
+        'songLocation' =>'required',
+        ]); 
+
+        $file = array('songLocation' => Input::file('songLocation'));
+        $extension = Input::file('songLocation')->getClientOriginalExtension();
+        $fileName = $request->get('songTitle').'.'.$extension;
+        Input::file('songLocation')->move('song',$fileName);
+
         $song = new Song;
 
         $song->songTitle = $request->get('songTitle');
@@ -50,6 +67,7 @@ class SongController extends Controller
         $song->duration = $request->get('duration');
         $song->price = $request->get('price');
         $song->language = $request->get('language');
+        $song->songLocation = $fileName;
 
         $song->save();
 

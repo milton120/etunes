@@ -8,7 +8,7 @@
 	<div class="col-md-6 col-md-offset-3">
 	    <h3>Album</h3>
         <hr/>
-        {!! Form::open(array('action' => 'AlbumController@store', 'class'=>'form-horizontal')) !!}
+        {!! Form::open(array('action' => 'AlbumController@store', 'class'=>'form-horizontal','files'=>true)) !!}
         
         @include('album.form');
 
